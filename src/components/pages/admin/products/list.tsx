@@ -1,20 +1,18 @@
-import { FormOutlined } from '@ant-design/icons';
-import { Button,Spin,Table} from 'antd';
+import { FileAddOutlined, FormOutlined } from '@ant-design/icons';
+import { Button,Spin,Switch,Table} from 'antd';
 import {  useEffect, useState } from 'react';
 import { ListStyle, Paragraph, Text, Title } from '../styles/product';
 import { Select } from 'antd';
-import { FlexRow } from '../styles/global';
+import { FlexColumn, FlexRow } from '../styles/global';
 import { getProducts, setLoading, useStore } from '../../../../store';
 import axios from 'axios'
 import { IProduct } from '../../../../types';
+import { useNavigate } from 'react-router-dom';
 const { Option } = Select;
 type Props = {}
 const List = (props: Props) => {
-  const [hideAndShow, setHideAndShow] = useState(0)
 
-  const handleHideAndShow = (id :number) =>{
-    setHideAndShow(id)
-  }
+  const navigate= useNavigate()
 
   const handleProvinceChange = (value :any) => {
     console.log(value);
@@ -24,7 +22,13 @@ const List = (props: Props) => {
     console.log(id);
     
   }
- 
+  const onSearch = (value: string) => {
+    console.log('search:', value);
+  };
+
+  const onChangeStatus = (id: number) => {
+    console.log(id);
+  };
   
   const columns = [
     {
@@ -67,7 +71,7 @@ const List = (props: Props) => {
     callApiProducts();
   } , [])
 
-  var listProducts : IProduct[] = []
+  let listProducts : IProduct[] = []
   if(products){
     
     listProducts = products?.map((product,index) => {
@@ -76,32 +80,43 @@ const List = (props: Props) => {
         name: product.name,
         desc: product.desc,
         price: product.price,
-        status: product.status,
+        status: <Switch defaultChecked onChange={() => onChangeStatus(product.id!)} />,
+        categoryId: product.categoryId,
         actions: [
-          hideAndShow ===  product.id && <Button type="primary" danger>Xóa</Button>,
-          hideAndShow ===  product.id && <Button type="primary" ghost>Sửa</Button>,
-          hideAndShow !==  product.id && <FormOutlined onClick={() => handleHideAndShow(product.id!)}/>
+          <Button key={index} type="primary" danger >Xóa</Button>,
+          <Button type="primary" ghost >Sửa</Button>,
         ],
       }
 
     })
     
   }
-  
-  
-  
-  
   return (  
     <ListStyle>
       <Title>Điện thoại</Title>
         <Paragraph>Danh mục sản phẩm</Paragraph>
-        <FlexRow>
+        <FlexRow justifyContent="space-between">
+          <FlexRow>
           <Text>Lọc theo danh mục: </Text>
-          <Select defaultValue={listProducts[0]} style={{ width: 120 }} onChange={handleProvinceChange}>
-            {listProducts?.map((product,index) => (
-              <Option key={index}>{product.name}</Option>
-            ))}
-          </Select>
+            <Select
+              showSearch
+              placeholder="Select a person"
+              optionFilterProp="children"
+              onChange={onChange}
+              onSearch={onSearch}
+              filterOption={(input, option) =>
+                (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase())
+              }
+            >
+            {listProducts.map((product,index) =>  
+              <Option key={index} value={product.categoryId}>{product.name}</Option>)}
+            </Select>
+          </FlexRow>
+
+          <FileAddOutlined 
+            style={{ fontSize: '32px', color:'#00B0D7', cursor:'pointer'}}  
+            onClick={() => navigate("/admin/products/add")}
+          />
         </FlexRow>
       <Table columns={columns} dataSource={listProducts} />
     </ListStyle>

@@ -3,8 +3,8 @@ import { IProduct } from "./IProduct";
 
 export interface StoreActions {
     type: string,
-    value: any,
-    payload?: any
+    payload: any,
+    value?: any
 }
 export interface StoreInitReducer{
     product : any,

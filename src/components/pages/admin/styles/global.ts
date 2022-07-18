@@ -7,7 +7,11 @@ const FlexColumn = styled.div `
 const FlexRow = styled.div `
     display: flex;
     flex-direction: row;
+    justify-content: ${({justifyContent}:any) => justifyContent || "start"
+    };
     gap:10px;
     margin-bottom: 20px;
 `
+
+
 export {FlexColumn,FlexRow}

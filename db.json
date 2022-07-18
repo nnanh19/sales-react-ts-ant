@@ -5,21 +5,22 @@
       "name": "sản phẩm 1",
       "price": 1000,
       "desc": "desc",
-      "status": "status"
-    },
-    {
-      "id": 2,
-      "name": "sản phẩm 2",
-      "price": 2000,
-      "desc": "desc",
-      "status": "status"
+      "status": "status",
+      "categoryId": 1
     },
     {
       "id": 3,
+      "name": "sản phẩm 2",
+      "price": 2000,
+      "desc": "desc",
+      "categoryId": 1
+    },
+    {
+      "id": 5,
       "name": "sản phẩm 3",
       "price": 3000,
       "desc": "desc",
-      "status": "status"
+      "categoryId": 2
     }
   ]
  

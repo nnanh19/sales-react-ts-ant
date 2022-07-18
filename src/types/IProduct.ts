@@ -3,5 +3,6 @@ export interface IProduct {
     name: string,
     desc: string,
     price: number,
-    status: string
+    status: any,
+    categoryId: number
 }
