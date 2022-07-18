@@ -1,6 +1,6 @@
 import { FileAddOutlined, FormOutlined } from '@ant-design/icons';
 import { Button,Spin,Switch,Table} from 'antd';
-import {  useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { ListStyle, Paragraph, Text, Title } from '../styles/product';
 import { Select } from 'antd';
 import { FlexColumn, FlexRow } from '../styles/global';
@@ -9,8 +9,10 @@ import axios from 'axios'
 import { IProduct } from '../../../../types';
 import { useNavigate } from 'react-router-dom';
 const { Option } = Select;
-type Props = {}
-const List = (props: Props) => {
+type Props = {
+  justifyContent?: string
+}
+const List:React.FC<Props> = () => {
 
   const navigate= useNavigate()
 

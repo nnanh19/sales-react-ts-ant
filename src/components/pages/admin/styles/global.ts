@@ -4,7 +4,7 @@ const FlexColumn = styled.div `
     display: flex;
     flex-direction: column;
 `
-const FlexRow = styled.div `
+const FlexRow = styled.div<{justifyContent?: string}> `
     display: flex;
     flex-direction: row;
     justify-content: ${({justifyContent}:any) => justifyContent || "start"
