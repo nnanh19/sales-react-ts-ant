@@ -12,10 +12,11 @@ const getProduct = (payload:IProduct) => {
         payload
     }
 }
-const setLoading = () => {
+const setProductImage = (payload: string) => {
     return {
-        type: 'set_loading'
+        type: 'set_product_image',
+        payload
     }
 }
 
-export {getProducts, getProduct, setLoading}
+export {getProducts, getProduct, setProductImage}

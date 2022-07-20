@@ -1,0 +1,1 @@
+export * as apiProduct from './product'

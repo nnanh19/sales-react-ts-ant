@@ -1,13 +1,13 @@
 import { Reducer } from "react";
 import { StoreActions, StoreInitReducer } from "../types/IContextProps";
 import Provider from "./Provider";
-import axios from 'axios';
-import { GET_PRODUCT, GET_PRODUCTS, SET_LOADING } from "./constants";
+import { GET_PRODUCT, GET_PRODUCTS, SET_Product_Image } from "./constants";
 const StoreController: any = ({children} :any) => {
 
     const initState: StoreInitReducer = {
         product: '',
-        products : []
+        products : [],
+        productImage: ''
     }
 
     const reducer: Reducer<any, StoreActions > = (state, action) => {
@@ -19,7 +19,11 @@ const StoreController: any = ({children} :any) => {
             case GET_PRODUCTS:
                 return {
                     products:  action.payload
-                }
+            }
+            case SET_Product_Image:
+                return {
+                    productImage: action.payload
+            }
             default:
                 break;
         }

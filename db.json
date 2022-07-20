@@ -21,7 +21,41 @@
       "price": 3000,
       "desc": "desc",
       "categoryId": 2
+    },
+    {
+      "shortDescription": "c",
+      "name": "SẢN PHẢM 1",
+      "price": 12000,
+      "promotion": 12,
+      "categoryId": 1,
+      "outstandingFeatures": "a",
+      "longDescription": "b",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658351870/ruk2hsibw8akx435hsri.jpg",
+      "id": 6
+    },
+    {
+      "name": "SẢN PHẢM 1",
+      "price": 12000,
+      "promotion": 12,
+      "categoryId": 1,
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658352374/p3z8ika0regcebh0yubi.png",
+      "id": 7
+    },
+    {
+      "name": "SẢN PHẢM 1",
+      "price": 12000,
+      "promotion": 12,
+      "categoryId": 1,
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658352602/f8lt3t3ku8trgir37eqe.png",
+      "id": 8
+    },
+    {
+      "name": "SẢN PHẢM 1",
+      "price": 12000,
+      "promotion": 12,
+      "categoryId": 1,
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658352736/hrlpkloneobrc3ulxzwh.jpg",
+      "id": 9
     }
   ]
- 
 }

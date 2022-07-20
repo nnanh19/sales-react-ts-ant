@@ -8,7 +8,8 @@ export interface StoreActions {
 }
 export interface StoreInitReducer{
     product : any,
-    products: IProduct[]
+    products: IProduct[],
+    productImage: string
 }
 
 export interface StoreProvider{
