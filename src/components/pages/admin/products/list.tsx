@@ -1,6 +1,6 @@
-import { FileAddOutlined } from '@ant-design/icons';
-import { Button,Switch,Table} from 'antd';
-import React, {  useEffect } from 'react';
+import { EditOutlined, FileAddOutlined, FormOutlined } from '@ant-design/icons';
+import { message, Switch,Table} from 'antd';
+import React, {  useEffect, useState } from 'react';
 import { ListStyle, Paragraph, Text, Title } from '../styles/product';
 import { Select } from 'antd';
 import { FlexRow } from '../styles';
@@ -8,6 +8,7 @@ import { getProducts,  useStore } from '../../../../store';
 import { IProduct } from '../../../../types';
 import { useNavigate } from 'react-router-dom';
 import { apiProduct } from '../../../../api';
+import { updateProduct, updateProductOneField } from '../../../../api/product';
 const { Option } = Select;
 type Props = {
   justifyContent?: string
@@ -15,10 +16,6 @@ type Props = {
 const List:React.FC<Props> = () => {
 
   const navigate= useNavigate()
-
-  const handleProvinceChange = (value :any) => {
-    console.log(value);
-  };
 
   const onChange = (id: number) => {
     console.log(id);
@@ -28,38 +25,62 @@ const List:React.FC<Props> = () => {
     console.log('search:', value);
   };
 
-  const onChangeStatus = (id: number) => {
-    console.log(id);
+  const onStatusChange = (data: IProduct) => {
+    // const product = {id: id, status: !status}
+    //  console.log(product);
+    let product =  {...data, status:!data.status}
+    const res = updateProduct(product)
+    .then( async (res) => {
+      const {data} = await apiProduct.getProducts();
+      dispatch(getProducts(data))
+      
+      res.data.status === false 
+      ?  message.success('Sản phẩm để trạng thái riêng tư') 
+      :  message.success('Sản phẩm đã trưng bày'); 
+      
+    })
+    .catch(() => message.error('Không thể chuyển trạng thái sản phẩm'))
+    
   };
-  
+    
   const columns = [
     {
       title: 'Id',
-      dataIndex: 'key',
+      key: 'id',
+      dataIndex: 'id',
     },
     {
       title: 'Name',
+      key: 'name',
       dataIndex: 'name',
     },
     {
       title: 'Image',
+      key: 'image',
       dataIndex: 'image',
+      render: (img : string) => <img width={70} src={img} alt="" />
     },
     {
       title: 'Price',
+      key: 'price',
       dataIndex: 'price',
     },
     {
       title: 'Desc',
+      key: 'desc',
       dataIndex: 'desc',
     },
     {
       title: 'Status',
-      dataIndex: 'status',
+      key: 'status',
+      dataIndex1: "id",
+      render: (product : IProduct) => <Switch defaultChecked={product.status} onChange={() => onStatusChange(product)} />
     },
     {
       title: 'Actions',
-      dataIndex: 'actions',
+      key: 'id',
+      dataIndex: 'id',
+      render: (id : number) => <EditOutlined onClick={() => navigate(`/admin/products/${id}/edit`)}/>
     },
   ];
 
@@ -77,27 +98,9 @@ const List:React.FC<Props> = () => {
     callApiProducts();
   } , [])
 
-  let listProducts : IProduct[] = []
-  if(products){
-    
-    listProducts = products?.map(product => {
-      return {
-        key: product.id,
-        name: product.name,
-        image: <img width={70} src={product.image} alt="" />,
-        desc: product.desc,
-        price: product.price,
-        status: <Switch defaultChecked onChange={() => onChangeStatus(product.id!)} />,
-        categoryId: product.categoryId,
-        actions: [
-          <Button type="primary" danger >Xóa</Button>,
-          <Button  type="primary" ghost >Sửa</Button>,
-        ],
-      }
 
-    })
-    
-  }
+
+
   return (  
     <ListStyle>
       <Title>Danh mục sản phẩm</Title>
@@ -105,7 +108,7 @@ const List:React.FC<Props> = () => {
         <FlexRow justifyContent="space-between">
           <FlexRow>
           <Text>Lọc theo danh mục: </Text>
-            <Select
+            {/* <Select
               showSearch
               placeholder="Select a person"
               optionFilterProp="children"
@@ -115,9 +118,9 @@ const List:React.FC<Props> = () => {
                 (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase())
               }
             >
-            {listProducts.map((product,index) =>  
+            {products.map((product,index) =>  
               <Option key={index} value={product.categoryId}>{product.name}</Option>)}
-            </Select>
+            </Select> */}
           </FlexRow>
 
           <FileAddOutlined 
@@ -125,7 +128,7 @@ const List:React.FC<Props> = () => {
             onClick={() => navigate("/admin/products/add")}
           />
         </FlexRow>
-      <Table columns={columns} dataSource={listProducts} />
+      <Table columns={columns} dataSource={products} />
     </ListStyle>
   )
 }

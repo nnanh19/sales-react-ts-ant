@@ -17,7 +17,7 @@ const Upload = styled.label `
   display:flex;
   flex-direction: column;
   align-items:center;
-  gap: 5px
+  gap: 5px;
 `
 const UploadIcon = styled(PlusOutlined) `
     border: 1px solid black;

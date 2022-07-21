@@ -1,28 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "sản phẩm 1",
-      "price": 1000,
-      "desc": "desc",
-      "status": "status",
-      "categoryId": 1
-    },
-    {
-      "id": 3,
-      "name": "sản phẩm 2",
-      "price": 2000,
-      "desc": "desc",
-      "categoryId": 1
-    },
-    {
-      "id": 5,
-      "name": "sản phẩm 3",
-      "price": 3000,
-      "desc": "desc",
-      "categoryId": 2
-    },
-    {
+      "status": false,
       "shortDescription": "c",
       "name": "SẢN PHẢM 1",
       "price": 12000,
@@ -31,31 +10,21 @@
       "outstandingFeatures": "a",
       "longDescription": "b",
       "image": "http://res.cloudinary.com/ph-th/image/upload/v1658351870/ruk2hsibw8akx435hsri.jpg",
-      "id": 6
+      "id": 1,
+      "true": ""
     },
     {
-      "name": "SẢN PHẢM 1",
+      "status": true,
+      "shortDescription": "c",
+      "name": "SẢN PHẢM 2",
       "price": 12000,
       "promotion": 12,
       "categoryId": 1,
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658352374/p3z8ika0regcebh0yubi.png",
-      "id": 7
-    },
-    {
-      "name": "SẢN PHẢM 1",
-      "price": 12000,
-      "promotion": 12,
-      "categoryId": 1,
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658352602/f8lt3t3ku8trgir37eqe.png",
-      "id": 8
-    },
-    {
-      "name": "SẢN PHẢM 1",
-      "price": 12000,
-      "promotion": 12,
-      "categoryId": 1,
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658352736/hrlpkloneobrc3ulxzwh.jpg",
-      "id": 9
+      "outstandingFeatures": "a",
+      "longDescription": "b",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658351870/ruk2hsibw8akx435hsri.jpg",
+      "id": 2,
+      "true": ""
     }
   ]
 }
