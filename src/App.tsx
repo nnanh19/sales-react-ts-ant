@@ -3,6 +3,7 @@ import { AdminLayout, Dashboard } from "./components/pages/admin";
 import { AdminProducEdit, AdminProductAdd, AdminProductList } from "./components/pages/admin/products";
 import Homepage from "./components/pages/site/homepage";
 import SiteLayout from "./components/pages/site/layout";
+import './App.css'
 
 function App() {
   return (

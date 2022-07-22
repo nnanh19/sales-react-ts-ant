@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Form, Input, ListStyle, Paragraph, Title, FlexColumn, FlexRow, Select, Button, LongInput, Upload, UploadIcon, ImagePreview } from '../styles'
+import { Form, Input, ListStyle, Paragraph, Title, FlexColumn, FlexRow, Select, Button, LongInput, Upload, UploadIcon, ImagePreview, BoxUpload } from '../styles'
 import { setProductImage, useStore } from '../../../../store';
 import axios from 'axios';
 import { Modal, notification } from 'antd';
@@ -97,21 +97,24 @@ const add: React.FC<Props> = (props: Props) => {
         <Form onFinish={onFinish} layout="vertical">
           <FlexColumn>
             <Form.Item>
-                <Upload htmlFor='image'>
-                    <UploadIcon />
-                    <input
-                    tabIndex={0}
-                    ref={imgRef}
-                    style={{display: 'none'}}
-                    type="file"
-                    id="image"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    onChange={(event) => handleImageChange(event.target.files)} />
-                    <p>Thêm ảnh</p>
-                </Upload>
-                <ImagePreview>
+                <BoxUpload style={{background:'white'}}>
+                  <Upload htmlFor='image'>
+                      <UploadIcon />
+                      <input
+                      tabIndex={0}
+                      ref={imgRef}
+                      style={{display: 'none'}}
+                      type="file"
+                      id="image"
+                      accept="image/png, image/jpg, image/jpeg, image/gif"
+                      onChange={(event) => handleImageChange(event.target.files)} />
+                      <p>Thêm ảnh</p>
+                  </Upload>
+                  <ImagePreview>
                   <img width={250} src={productImage} />
                 </ImagePreview>
+                </BoxUpload>
+                
             </Form.Item>
             <Form.Item name="shortDescription" label="Mô tả ngắn">
               <LongInput width="50vh"/>

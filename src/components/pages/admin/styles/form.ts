@@ -19,13 +19,16 @@ const Upload = styled.label `
   align-items:center;
   gap: 5px;
 `
+const BoxUpload = styled.div `
+    min-height: 343px;
+
+`
 const UploadIcon = styled(PlusOutlined) `
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px
 `
 const ImagePreview = styled.div`
-    min-height: 257px;
     text-align:center;
 `
 
@@ -37,4 +40,4 @@ const Button = styled(Ant.Button) `
 const LongInput = styled(TextArea)<{width?: string}> `
     width: ${({width}) => width};
 `
-export {Form, Input, Select, Button, LongInput, Upload, UploadIcon,ImagePreview}
+export {Form, Input, Select, Button, LongInput, Upload, UploadIcon,ImagePreview,BoxUpload}

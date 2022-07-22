@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Form, Input, ListStyle, Paragraph, Title, FlexColumn, FlexRow, Select, Button, LongInput, Upload, UploadIcon, ImagePreview } from '../styles'
-import { setProductImage, useStore } from '../../../../store';
+import React, { createRef, useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Form, Input, ListStyle, Paragraph, Title, FlexColumn, FlexRow, Select, Button, LongInput, Upload, UploadIcon, ImagePreview, BoxUpload } from '../styles'
+import { getProduct, setProductImage, useStore } from '../../../../store';
 import axios from 'axios';
 import { Modal, notification } from 'antd';
 import { apiProduct } from '../../../../api';
+import { useForm } from 'antd/lib/form/Form';
 type Props = {
   justifyContent?: string;
   alignItems?:string
@@ -17,43 +18,95 @@ const edit: React.FC<Props> = (props: Props) => {
   const {state, dispatch} = useStore()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [errorModel, setErrorModel] = useState('');
-  const {productImage} = state
+  const [productImage, setProductImage ]  = useState()
+
+  const {product} = state
 
   const imgRef = useRef<any>()
 
+  const {id}: any = useParams();
+
+  useEffect(() => {
+    new Promise((resolve :any, reject : any)=>{
+      apiProduct.getProduct(id)
+      .then(res=> {
+        if(res.status === 200){
+          dispatch(getProduct(res.data))
+          return resolve(res.data)
+        }else{
+          return reject()
+        }
+      });
+    })
+    .then(({image} : any)=> {
+      setProductImage(image)
+    })
+    .catch(()=> {
+      Modal.error({
+        content: 'Không thành công, vui lòng thử lại!',
+      });
+      navigate('/admin/products')
+    })
+  }, [])    
 
   const openNotificationWithIcon = (type: NotificationType) => {
     notification[type](
       type === 'success' ? {
-        message: 'Thêm mới sản phẩm thành công!',
+        message: 'Cập nhật sản phẩm thành công!',
         description:
           '',
       } : {
-        message: 'Thêm mới sản phẩm thất bại!',
+        message: 'Cập nhật sản phẩm thất bại!',
         description:
           '',
       }
     );
   };
-
-  const onFinish = (value :any) => {
-    if(productImage){
+  
+  const [form] = useForm();
+  useEffect(() => {
+    form.setFieldsValue({
+      name: product?.name,
+      price: product?.price,
+      promotion: product?.promotion,
+      categoryId: product?.categoryId,
+      outstandingFeatures: product?.outstandingFeatures,
+      longDescription: product?.longDescription,
+      shortDescription: product?.shortDescription,
+      image: product?.image,
+      status: product?.status
+    })
+  }, [product])
+  
+  const getValue = (value :string) => {{
+    return form.getFieldValue(value)
+  }}
+  const submitForm = () => {
+     if(productImage){
       const product = {
-        ...value,
-        price: Number(value.price),
-        promotion: Number(value.promotion),
-        categoryId: Number(value.categoryId),
-        image: productImage
+        id,
+        name: getValue('name'),
+        price:getValue('price'),
+        promotion: Number(getValue('promotion')),
+        categoryId: getValue('categoryId'),
+        outstandingFeatures: getValue('outstandingFeatures'),
+        longDescription: getValue('longDescription'),
+        shortDescription: getValue('shortDescription'),
+        image: productImage,
+        status: getValue('status')
       }
       const ProductCreate = async () => {
-        const data = await apiProduct.createProduct(product);
-        data.status === 201 ? openNotificationWithIcon('success') : openNotificationWithIcon('error')
+        const data = await apiProduct.updateProduct(product);
+        data.status === 200 ? openNotificationWithIcon('success') : openNotificationWithIcon('error')
+        navigate('/admin/products')
       }
       ProductCreate();
     }else{
       imgRef.current.click()
     }
+      
   }
+  
   
   const formData = new FormData();
   const API = 'https://api.cloudinary.com/v1_1/ph-th/image/upload';
@@ -70,7 +123,7 @@ const edit: React.FC<Props> = (props: Props) => {
       formData.append('file' , files[0] );
       formData.append('upload_preset', preset );
       const {data} = await axios.post(API, formData)
-      dispatch(setProductImage(data.url))
+      setProductImage(data.url)
     }
   };
   
@@ -80,51 +133,50 @@ const edit: React.FC<Props> = (props: Props) => {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    dispatch(setProductImage(''))
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    dispatch(setProductImage(''))
   };
 
-  
+
   return (
     <ListStyle>
       <Title onClick={() => console.log(formData) }>Cập nhật sản phẩm</Title>
       <Paragraph onClick={() => navigate('/admin/products')} style={{cursor: 'pointer'}}>Danh mục sản phẩm</Paragraph>
-        
-        <Form onFinish={onFinish} layout="vertical">
+        <Form layout="vertical" form={form}>  
           <FlexColumn>
             <Form.Item>
-                <Upload htmlFor='image'>
-                    <UploadIcon />
-                    <input
-                    tabIndex={0}
-                    ref={imgRef}
-                    style={{display: 'none'}}
-                    type="file"
-                    id="image"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    onChange={(event) => handleImageChange(event.target.files)} />
-                    <p>Thêm ảnh</p>
-                </Upload>
-                <ImagePreview>
-                  <img width={250} src={productImage} />
-                </ImagePreview>
+                  <BoxUpload style={{background:'white'}}>
+                    <Upload htmlFor='image'>
+                        <UploadIcon />
+                        <input
+                        tabIndex={0}
+                        ref={imgRef}
+                        style={{display: 'none'}}
+                        type="file"
+                        id="image"
+                        accept="image/png, image/jpg, image/jpeg, image/gif"
+                        onChange={(event) => handleImageChange(event.target.files)} />
+                        <p>Cập nhật ảnh</p>
+                    </Upload>
+                    <ImagePreview>
+                    <img width={250} src={productImage} />
+                    </ImagePreview>
+                </BoxUpload>
             </Form.Item>
             <Form.Item name="shortDescription" label="Mô tả ngắn">
               <LongInput width="50vh"/>
             </Form.Item>
           </FlexColumn>
           <FlexColumn>
-            <Form.Item name="name" label="Tên sản phẩm" rules={[{required: true}]}>
+            <Form.Item name="name"  label="Tên sản phẩm" rules={[{required: true}]}>
               <Input />
             </Form.Item>
             <FlexRow>
 
               <Form.Item name="price" label="Giá sản phẩm" rules={[{required: true}]}>
-                <Input value={1} width="50vh" />
+                <Input width="50vh" />
               </Form.Item>
 
               <Form.Item name="promotion" label="Khuyến mãi (%)" rules={[{required: true}]}>
@@ -147,7 +199,7 @@ const edit: React.FC<Props> = (props: Props) => {
             <Form.Item name="longDescription" label="Mô tả dài">
               <LongInput />
             </Form.Item>
-            <Button type='primary' htmlType='submit'>Thêm</Button>
+            <Button type='primary' htmlType='submit' onClick={submitForm}>Cập nhật</Button>
           </FlexColumn>
           
         </Form>

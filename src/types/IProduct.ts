@@ -5,5 +5,6 @@ export interface IProduct {
     desc: string,
     price: number,
     status: any,
-    categoryId: number
+    categoryId: number,
+    promotion?: number
 }

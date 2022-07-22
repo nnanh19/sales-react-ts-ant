@@ -1,11 +1,15 @@
 import instance from "./instance";
 
-const getProduct = () => {
-    const url = "/product"
+const getProduct = (id : number) => {
+    const url = `/products/${id}`
     return instance.get(url)
 }
 const getProducts = () => {
-    const url = "/products"
+    const url = "/products?_sort=id&_order=asc"
+    return instance.get(url)
+}
+const getProductsByCategory = (id : number) => {
+    const url = `/categories/${id}?_embed=products`
     return instance.get(url)
 }
 
@@ -22,4 +26,4 @@ const updateProduct = (data:any) => {
     return instance.put(url, data)
 }
 
-export {getProduct, getProducts, createProduct,updateProduct, updateProductOneField}
+export {getProduct, getProducts,getProductsByCategory, createProduct,updateProduct, updateProductOneField,}

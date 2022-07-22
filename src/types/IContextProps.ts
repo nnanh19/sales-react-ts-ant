@@ -1,4 +1,5 @@
 import { Dispatch, Reducer } from "react"
+import { ICategory } from "./ICategory";
 import { IProduct } from "./IProduct";
 
 export interface StoreActions {
@@ -9,7 +10,8 @@ export interface StoreActions {
 export interface StoreInitReducer{
     product : any,
     products: IProduct[],
-    productImage: string
+    productImage: string,
+    categories: ICategory[],
 }
 
 export interface StoreProvider{

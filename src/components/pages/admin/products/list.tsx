@@ -3,27 +3,23 @@ import { message, Switch,Table} from 'antd';
 import React, {  useEffect, useState } from 'react';
 import { ListStyle, Paragraph, Text, Title } from '../styles/product';
 import { Select } from 'antd';
-import { FlexRow } from '../styles';
-import { getProducts,  useStore } from '../../../../store';
+import { FlexRow, TableAnt } from '../styles';
+import { getCategories, getProducts,  useStore } from '../../../../store';
 import { IProduct } from '../../../../types';
 import { useNavigate } from 'react-router-dom';
-import { apiProduct } from '../../../../api';
+import { apiCategory, apiProduct } from '../../../../api';
 import { updateProduct, updateProductOneField } from '../../../../api/product';
-const { Option } = Select;
 type Props = {
   justifyContent?: string
 }
 const List:React.FC<Props> = () => {
 
+  const {state, dispatch} = useStore()
+  
+  const {products, categories} = state
+  console.log(state);
+  
   const navigate= useNavigate()
-
-  const onChange = (id: number) => {
-    console.log(id);
-    
-  }
-  const onSearch = (value: string) => {
-    console.log('search:', value);
-  };
 
   const onStatusChange = (data: IProduct) => {
     // const product = {id: id, status: !status}
@@ -35,12 +31,10 @@ const List:React.FC<Props> = () => {
       dispatch(getProducts(data))
       
       res.data.status === false 
-      ?  message.success('Sản phẩm để trạng thái riêng tư') 
+      ?  message.warning('Sản phẩm để trạng thái riêng tư') 
       :  message.success('Sản phẩm đã trưng bày'); 
-      
     })
     .catch(() => message.error('Không thể chuyển trạng thái sản phẩm'))
-    
   };
     
   const columns = [
@@ -66,9 +60,15 @@ const List:React.FC<Props> = () => {
       dataIndex: 'price',
     },
     {
+      title: 'Sale',
+      key: 'price',
+      dataIndex1: 'id',
+      render: (product: IProduct) => <p>{product.promotion ? product.price * ((100 - product.promotion!) /100): product.price } </p>
+    },
+    {
       title: 'Desc',
-      key: 'desc',
-      dataIndex: 'desc',
+      key: 'longDescription',
+      dataIndex: 'longDescription',
     },
     {
       title: 'Status',
@@ -84,9 +84,13 @@ const List:React.FC<Props> = () => {
     },
   ];
 
-  const {state, dispatch} = useStore()
-  
-  const {products} = state
+  const handleFilterProductByCategory = async (value : number) => {
+    let res = await apiProduct.getProductsByCategory(value)
+    if(res.status === 200) {
+      dispatch(getProducts(res.data.products))
+    }
+  }
+
 
   useEffect(() =>{
     const callApiProducts = async () => {
@@ -95,11 +99,18 @@ const List:React.FC<Props> = () => {
         dispatch(getProducts(res.data))
       }
     }
-    callApiProducts();
+    callApiProducts()
   } , [])
 
-
-
+  useEffect(() =>{
+    const callApiCategories = async () => {
+      let res = await apiCategory.getCategories()
+      if(res.status === 200) {
+        dispatch(getCategories(res.data))
+      }
+    }
+    callApiCategories()
+  }, [])
 
   return (  
     <ListStyle>
@@ -108,19 +119,24 @@ const List:React.FC<Props> = () => {
         <FlexRow justifyContent="space-between">
           <FlexRow>
           <Text>Lọc theo danh mục: </Text>
-            {/* <Select
-              showSearch
-              placeholder="Select a person"
-              optionFilterProp="children"
-              onChange={onChange}
-              onSearch={onSearch}
-              filterOption={(input, option) =>
-                (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase())
-              }
-            >
-            {products.map((product,index) =>  
-              <Option key={index} value={product.categoryId}>{product.name}</Option>)}
-            </Select> */}
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder="Chọn danh mục sản phẩm"
+            optionFilterProp="children"
+            filterOption={(input, option) => (option!.children as unknown as string).includes(input)}
+            filterSort={(optionA, optionB) =>
+              (optionA!.children as unknown as string)
+                .toLowerCase()
+                .localeCompare((optionB!.children as unknown as string).toLowerCase())
+            }
+            onChange={handleFilterProductByCategory}
+          >
+            {categories.map(category => 
+              <Select.Option key={category.id} value={category.id}>
+                {category.name}
+              </Select.Option>)}
+          </Select>
           </FlexRow>
 
           <FileAddOutlined 
@@ -128,7 +144,7 @@ const List:React.FC<Props> = () => {
             onClick={() => navigate("/admin/products/add")}
           />
         </FlexRow>
-      <Table columns={columns} dataSource={products} />
+      <TableAnt  columns={columns} dataSource={products} />
     </ListStyle>
   )
 }

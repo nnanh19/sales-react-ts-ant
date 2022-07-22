@@ -1,4 +1,4 @@
-import { IProduct } from "../types"
+import { ICategory, IProduct } from "../types"
 
 const getProducts = (payload:IProduct[]) => {
     return {
@@ -12,6 +12,12 @@ const getProduct = (payload:IProduct) => {
         payload
     }
 }
+const getCategories = (payload:ICategory[]) => {
+    return {
+        type: 'get_categories',
+        payload
+    }
+}
 const setProductImage = (payload: string) => {
     return {
         type: 'set_product_image',
@@ -19,4 +25,4 @@ const setProductImage = (payload: string) => {
     }
 }
 
-export {getProducts, getProduct, setProductImage}
+export {getProducts, getProduct, setProductImage, getCategories}

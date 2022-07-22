@@ -11,4 +11,5 @@ const LayoutStyle = styled.div `
     padding: 0;
     box-sizing: border-box;
 `
+
 export default LayoutStyle
