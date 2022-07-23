@@ -34,7 +34,7 @@
       "longDescription": "bcd",
       "shortDescription": "c",
       "image": "http://res.cloudinary.com/ph-th/image/upload/v1658509224/jgvwxd5ntlj23j2zebml.png",
-      "status": false
+      "status": true
     },
     {
       "id": 2,
@@ -47,6 +47,40 @@
       "shortDescription": "c",
       "image": "http://res.cloudinary.com/ph-th/image/upload/v1658509244/izndvm7zq13e9vbaw45n.png",
       "status": true
+    },
+    {
+      "id": 7,
+      "name": "Iphone 10 update",
+      "price": 100000,
+      "promotion": 10,
+      "categoryId": 1,
+      "outstandingFeatures": "abcd",
+      "longDescription": "abcd",
+      "shortDescription": "abcd",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658537938/ce5crqultylawzaxsqdb.jpg",
+      "status": true
+    },
+    {
+      "shortDescription": "mô tả ngắn",
+      "name": "Laptop 759",
+      "price": 100000,
+      "promotion": 10,
+      "categoryId": 2,
+      "outstandingFeatures": "abcd",
+      "longDescription": "mô tả dài",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658537924/fz1mvhvbqa9nzg1kgsty.png",
+      "id": 8
+    },
+    {
+      "shortDescription": "Ngắn",
+      "name": "Điện thoại 19",
+      "price": 10000000,
+      "promotion": 10,
+      "categoryId": 1,
+      "outstandingFeatures": "Nổi bật",
+      "longDescription": "Dài",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658538093/lgjmfu1lu2wj462glmth.png",
+      "id": 9
     }
   ],
   "categories": [

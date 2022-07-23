@@ -48,6 +48,7 @@ const add: React.FC<Props> = (props: Props) => {
       const ProductCreate = async () => {
         const data = await apiProduct.createProduct(product);
         data.status === 201 ? openNotificationWithIcon('success') : openNotificationWithIcon('error')
+        navigate('/admin/products')
       }
       ProductCreate();
     }else{
@@ -70,6 +71,7 @@ const add: React.FC<Props> = (props: Props) => {
       formData.append('file' , files[0] );
       formData.append('upload_preset', preset );
       const {data} = await axios.post(API, formData)
+      console.log(data);
       dispatch(setProductImage(data.url))
     }
   };
@@ -121,27 +123,27 @@ const add: React.FC<Props> = (props: Props) => {
             </Form.Item>
           </FlexColumn>
           <FlexColumn>
-            <Form.Item name="name" label="Tên sản phẩm" rules={[{required: true}]}>
+            <Form.Item name="name" label="Tên sản phẩm" rules={[{required: true, message:'Bạn cần nhập tên'}]}>
               <Input />
             </Form.Item>
             <FlexRow>
 
-              <Form.Item name="price" label="Giá sản phẩm" rules={[{required: true}]}>
+              <Form.Item name="price" label="Giá sản phẩm" rules={[{required: true, message:'Bạn cần nhập giá'}]}>
                 <Input width="50vh" />
               </Form.Item>
 
-              <Form.Item name="promotion" label="Khuyến mãi (%)" rules={[{required: true}]}>
+              <Form.Item name="promotion" label="Khuyến mãi (%)" >
                 <Input width="50vh"/>
               </Form.Item>
 
             </FlexRow>
-            <Form.Item name="categoryId" label="Danh mục sản phẩm" rules={[{required: true}]}>
+            <Form.Item name="categoryId" label="Danh mục sản phẩm" rules={[{required: true, message:'Bạn cần chọn danh mục' }]}>
               <Select 
                 placeholder="Chọn danh mục sản phẩm"
                 style={{width:"50%"}}
               >
-                <Select.Option value="1">Anh</Select.Option>
-                <Select.Option value="2">AnhE</Select.Option>
+                <Select.Option value="1">Điện thoại</Select.Option>
+                <Select.Option value="2">Laptop</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item name="outstandingFeatures" label="Đặc điểm nổi bật">
