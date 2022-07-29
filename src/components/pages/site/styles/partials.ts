@@ -4,11 +4,15 @@ const { Search } = Input;
 
 const HeaderStyle = styled(Layout.Header)`
   background-color: #d70018;
+`;
+const HeaderContent = styled.div `
+  max-width: 1300px;
+  margin:auto;
   height: 64px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-`;
+  justify-content: space-between;
+`
 const FooterStyle = styled(Layout.Footer)``;
 const Header__Image = styled.img`
   max-width: 65px;
@@ -51,4 +55,5 @@ export {
   Header__Utils,
   Header__Utils_FlexColumn,
   Header__Utils_FlexRown,
+  HeaderContent,
 };

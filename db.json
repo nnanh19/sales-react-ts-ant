@@ -2,26 +2,26 @@
   "products": [
     {
       "id": 5,
-      "name": "Iphone 11",
+      "name": "Samsung Ios",
       "price": 12000,
       "promotion": 50,
       "categoryId": 1,
       "outstandingFeatures": "a",
       "longDescription": "bcd",
       "shortDescription": "c",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658488406/oswy6xgreaqjvw6niyad.png",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109867/g6m8xeb26cxmpplvsqyj.jpg",
       "status": true
     },
     {
       "id": 6,
-      "name": "Laptop",
+      "name": "Oppo IOSS",
       "price": 12000,
       "promotion": 50,
       "categoryId": 2,
       "outstandingFeatures": "a",
       "longDescription": "bcd",
       "shortDescription": "c",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658488406/oswy6xgreaqjvw6niyad.png",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109880/ahuaqqjenuo4kgw2q3w2.jpg",
       "status": true
     },
     {
@@ -32,55 +32,65 @@
       "categoryId": 1,
       "outstandingFeatures": "Nổi bật",
       "longDescription": "bcd",
-      "shortDescription": "c",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658509224/jgvwxd5ntlj23j2zebml.png",
+      "shortDescription": "MÔ TẢ NGẮN\n",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109833/sqfgtyuospcrwviuwph1.jpg",
       "status": true
     },
     {
       "id": 2,
-      "name": "Laptop",
+      "name": "Iphone Androi",
       "price": 12000,
       "promotion": 20,
       "categoryId": 2,
       "outstandingFeatures": "abcd",
       "longDescription": "babcd",
       "shortDescription": "c",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658509244/izndvm7zq13e9vbaw45n.png",
-      "status": true
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109845/si4plnvugnsj1ytibejw.jpg",
+      "status": false
     },
     {
       "id": 7,
-      "name": "Iphone 10 update",
+      "name": "Poco IOSS",
       "price": 100000,
       "promotion": 10,
       "categoryId": 1,
       "outstandingFeatures": "abcd",
       "longDescription": "abcd",
       "shortDescription": "abcd",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658537938/ce5crqultylawzaxsqdb.jpg",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109926/hokoxu7omx4gtxek77is.jpg",
       "status": true
     },
     {
-      "shortDescription": "mô tả ngắn",
-      "name": "Laptop 759",
+      "id": 8,
+      "name": "Laptop Iphonn",
       "price": 100000,
       "promotion": 10,
       "categoryId": 2,
       "outstandingFeatures": "abcd",
       "longDescription": "mô tả dài",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658537924/fz1mvhvbqa9nzg1kgsty.png",
-      "id": 8
+      "shortDescription": "mô tả ngắn",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109897/oelaifcgahwyif5kpshb.jpg"
     },
     {
-      "shortDescription": "Ngắn",
+      "id": 9,
       "name": "Điện thoại 19",
       "price": 10000000,
       "promotion": 10,
       "categoryId": 1,
       "outstandingFeatures": "Nổi bật",
       "longDescription": "Dài",
-      "image": "http://res.cloudinary.com/ph-th/image/upload/v1658538093/lgjmfu1lu2wj462glmth.png",
-      "id": 9
+      "shortDescription": "Ngắn",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109910/ahrn44jxhf50hluyd0cl.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Không được phân loại",
+      "price": 100000,
+      "promotion": 10,
+      "categoryId": 1,
+      "outstandingFeatures": "NỔI BẬT",
+      "shortDescription": "MÔ TẢ NGẮN",
+      "image": "http://res.cloudinary.com/ph-th/image/upload/v1659109915/shsvqsqdkokpsvq17dlj.jpg"
     }
   ],
   "categories": [

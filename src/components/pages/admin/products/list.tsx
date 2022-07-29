@@ -1,5 +1,5 @@
 import { EditOutlined, FileAddOutlined, FormOutlined } from '@ant-design/icons';
-import { message, Switch,Table} from 'antd';
+import { Image, message, Switch,Table} from 'antd';
 import React, {  useEffect, useState } from 'react';
 import { ListStyle, Paragraph, Text, Title } from '../styles/product';
 import { Select } from 'antd';
@@ -52,7 +52,7 @@ const List:React.FC<Props> = () => {
       title: 'Image',
       key: 'image',
       dataIndex: 'image',
-      render: (img : string) => <img width={70} src={img} alt="" />
+      render: (img : string) =><Image width={70}src={img} />
     },
     {
       title: 'Price',
@@ -71,11 +71,17 @@ const List:React.FC<Props> = () => {
       dataIndex: 'longDescription',
     },
     {
+      title: 'Tính năng đặc biệt',
+      key: 'outstandingFeatures',
+      dataIndex: "outstandingFeatures",
+    },
+    {
       title: 'Status',
       key: 'status',
       dataIndex1: "id",
       render: (product : IProduct) => <Switch defaultChecked={product.status} onChange={() => onStatusChange(product)} />
     },
+    
     {
       title: 'Actions',
       key: 'id',

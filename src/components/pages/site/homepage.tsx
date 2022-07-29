@@ -1,10 +1,16 @@
-import React from 'react'
+import Content from './content'
+import Footer from './footer'
+import Header from './header'
 
 type Props = {}
 
 const Homepage = (props: Props) => {
   return (
-    <div>H</div>
+    <div>
+      <Header />
+      <Content />
+      <Footer />
+    </div>
   )
 }
 

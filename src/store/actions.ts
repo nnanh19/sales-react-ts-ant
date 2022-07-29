@@ -24,5 +24,11 @@ const setProductImage = (payload: string) => {
         payload
     }
 }
+const setCart = (payload: object) => {
+    return {
+        type: 'set_cart',
+        payload
+    }
+}
 
-export {getProducts, getProduct, setProductImage, getCategories}
+export {getProducts, getProduct, setProductImage, getCategories, setCart}

@@ -12,6 +12,7 @@ export interface StoreInitReducer{
     products: IProduct[],
     productImage: string,
     categories: ICategory[],
+    myCart: any
 }
 
 export interface StoreProvider{

@@ -1,14 +1,15 @@
 import { Reducer } from "react";
 import { StoreActions, StoreInitReducer } from "../types/IContextProps";
 import Provider from "./Provider";
-import { GET_Categories, GET_PRODUCT, GET_PRODUCTS, SET_Product_Image } from "./constants";
+import { GET_Categories, GET_PRODUCT, GET_PRODUCTS, SET_CART, SET_Product_Image } from "./constants";
 const StoreController: any = ({children} :any) => {
 
     const initState: StoreInitReducer = {
         product: '',
         products : [],
         productImage: '',
-        categories: []
+        categories: [],
+        myCart : []
     }
 
     const reducer: Reducer<any, StoreActions > = (state, action) => {
@@ -33,6 +34,12 @@ const StoreController: any = ({children} :any) => {
                     ...state,
                     productImage: action.payload
             }
+            case SET_CART :
+                return {
+                    ...state,
+                    myCart: action.payload
+                }
+            
             default:
                 break;
         }

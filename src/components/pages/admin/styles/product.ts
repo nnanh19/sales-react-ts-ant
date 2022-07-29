@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 const ListStyle = styled.div `
 
 `
-const Title = styled(Typography.Title) `
+const Title = styled(Typography.Title)`
 
 `
 const Text = styled(Typography.Text) `
